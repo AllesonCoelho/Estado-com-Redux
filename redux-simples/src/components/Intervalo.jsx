@@ -5,7 +5,6 @@ import {connect} from 'react-redux'
 import {alterarNumeroMin} from '../store/actions/numeros'
 
 function Intervalo (props){
-    props.alterarMin(10000)
 
     const {min, max} = props
     return (
@@ -13,7 +12,7 @@ function Intervalo (props){
             <div className="Intervalo">
                 <span>
                     <strong>Minimo: </strong>
-                    <input type="number" value={min} readOnly
+                    <input type="number" value={min} onChange={e => props.alterarMin(+e.target.value)}
                     />
                 </span>
 
@@ -38,7 +37,7 @@ function mapStateToProps(state){
     }
 }
 
-function mapActionCreatorsToProp(dispatch){
+function mapDispatchToProp(dispatch){
     return{
         alterarMin(novoNumero){
             //action creator retorna uma action
@@ -50,4 +49,4 @@ function mapActionCreatorsToProp(dispatch){
 
 }
 
-export default connect(mapStateToProps, mapActionCreatorsToProp)(Intervalo)
+export default connect(mapStateToProps, mapDispatchToProp)(Intervalo)
